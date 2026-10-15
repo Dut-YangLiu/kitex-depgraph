@@ -1,0 +1,28 @@
+扫描仓库 frontend(39 个包)
+扫描仓库 cart(9 个包)
+扫描仓库 checkout(9 个包)
+扫描仓库 email(10 个包)
+扫描仓库 order(7 个包)
+扫描仓库 payment(9 个包)
+扫描仓库 product(8 个包)
+扫描仓库 user(7 个包)
+扫描仓库 rpc_gen(21 个包)
+扫描仓库 common(4 个包)
+
+扫描完成:10 个仓库，123 个包，220 个 Go 文件，耗时 0.1s
+发现 7 个服务实现、36 处 RPC 调用、10 条组件间依赖;问题：高 0 · 中 0 · 提示 1
+
+组件间依赖:
+  cart -> product.ProductCatalogService [product] GetProduct
+  checkout -> cart.CartService [cart] EmptyCart、GetCart
+  checkout -> order.OrderService [order] MarkOrderPaid、PlaceOrder
+  checkout -> payment.PaymentService [payment] Charge
+  checkout -> product.ProductCatalogService [product] GetProduct
+  frontend -> cart.CartService [cart] AddItem、GetCart(3)
+  frontend -> checkout.CheckoutService [checkout] Checkout
+  frontend -> order.OrderService [order] ListOrder
+  frontend -> product.ProductCatalogService [product] GetProduct(4)、ListProducts(2)、SearchProducts
+  frontend -> user.UserService [user] Login、Register
+
+图数据: out/graph.json
+报告:   out/report.md

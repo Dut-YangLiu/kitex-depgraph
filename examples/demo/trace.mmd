@@ -1,0 +1,20 @@
+flowchart TD
+  subgraph c0["gateway"]
+    f0["handler.CreateOrder"]
+    f1["rpc.CreateOrder"]
+  end
+  subgraph c1["order-svc"]
+    f2["(*handler.OrderServiceImpl).CreateOrder"]
+    f3["(*service.OrderService).Create"]
+    f5["(rpc.PayAdapter).Prepay"]
+  end
+  subgraph c2["user-svc"]
+    f4["(*main.UserServiceImpl).GetUser"]
+  end
+  f6["pay.PayService(工作区外的服务)"]
+  f0 --> f1
+  f1 ==>|"order.OrderService/CreateOrder"| f2
+  f2 --> f3
+  f3 ==>|"user.UserService/GetUser"| f4
+  f3 -.-> f5
+  f5 -.->|"pay.PayService/prepay"| f6

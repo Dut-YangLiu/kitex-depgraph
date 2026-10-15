@@ -1,0 +1,7 @@
+# scan output
+depgraph-out/
+out/
+# local binary
+/kitex-depgraph
+# example sources cloned for reproduction
+examples/gomall/biz-demo/

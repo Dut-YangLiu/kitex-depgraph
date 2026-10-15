@@ -1,0 +1,9 @@
+diff --git a/service/user.go b/service/user.go
+index 1111111..2222222 100644
+--- a/service/user.go
++++ b/service/user.go
+@@ -12,3 +12,4 @@ func LoadUser(ctx context.Context, id int64) (string, error) {
+ 		return "", err
+ 	}
++	// trim the name
+ 	return u.Name, nil

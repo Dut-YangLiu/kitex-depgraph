@@ -1,0 +1,25 @@
+扫描仓库 gateway(6 个包)
+扫描仓库 order-svc(7 个包)
+扫描仓库 user-svc(3 个包)
+扫描仓库 user-svc-v2(1 个包)
+扫描仓库 common-sdk(1 个包)
+扫描仓库 idl(4 个包)
+
+扫描完成:6 个仓库，22 个包，32 个 Go 文件，耗时 0.0s
+发现 3 个服务实现、10 处 RPC 调用、6 条组件间依赖;问题：高 1 · 中 2 · 提示 3
+
+组件间依赖:
+  gateway -> order.OrderService [order-svc] CreateOrder、GetOrder
+  gateway -> order.OrderService [order-svc(缺方法)] QueryOrderLegacy
+  gateway -> user.UserService [user-svc] GetUser(2)
+  order-svc -> pay.PayService [工作区外] prepay
+  order-svc -> user.UserService [多个候选:user-svc、user-svc-v2] GetUser
+  order-svc -> user.UserService [user-svc] BatchGetUser、GetUser
+
+需要关注:
+  [高] gateway 调用了 order.OrderService/QueryOrderLegacy,但实现方(order-svc)的生成代码里没有这个方法
+  [中] order-svc 调用的 user.UserService 有 2 个候选实现方:user-svc、user-svc-v2
+  [中] order.OrderService 有 2 份生成代码，方法集合不一致(IDL 不同步)
+
+图数据: depgraph-out/graph.json
+报告:   depgraph-out/report.md

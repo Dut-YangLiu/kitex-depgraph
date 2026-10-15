@@ -1,0 +1,23 @@
+[checkout] (*main.CheckoutServiceImpl).Checkout  handler.go:35
+└─ (*biz/service.CheckoutService).Run  biz/service/checkout.go:56
+   ├─ ⇒ RPC cart.CartService/GetCart  checkout:biz/service/checkout.go:60
+   │  └─ [cart] (*main.CartServiceImpl).GetCart  handler.go:35
+   ├─ ⇒ RPC product.ProductCatalogService/GetProduct  checkout:biz/service/checkout.go:75
+   │  └─ [product] (*main.ProductCatalogServiceImpl).GetProduct  handler.go:35
+   ├─ ⇒ RPC order.OrderService/PlaceOrder  checkout:biz/service/checkout.go:110
+   │  └─ [order] (*main.OrderServiceImpl).PlaceOrder  handler.go:28
+   ├─ ⇒ RPC cart.CartService/EmptyCart  checkout:biz/service/checkout.go:117
+   │  └─ [cart] (*main.CartServiceImpl).EmptyCart  handler.go:42
+   ├─ ⇒ RPC payment.PaymentService/Charge  checkout:biz/service/checkout.go:139
+   │  └─ [payment] (*main.PaymentServiceImpl).Charge  handler.go:28
+   └─ ⇒ RPC order.OrderService/MarkOrderPaid  checkout:biz/service/checkout.go:161
+      └─ [order] (*main.OrderServiceImpl).MarkOrderPaid  handler.go:42
+
+涉及组件(5):checkout → cart → product → order → payment
+RPC 调用(6):
+  checkout → cart.CartService/GetCart → cart
+  checkout → product.ProductCatalogService/GetProduct → product
+  checkout → order.OrderService/PlaceOrder → order
+  checkout → cart.CartService/EmptyCart → cart
+  checkout → payment.PaymentService/Charge → payment
+  checkout → order.OrderService/MarkOrderPaid → order

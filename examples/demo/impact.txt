@@ -1,0 +1,25 @@
+改动所在仓库:user-svc
+
+改动的函数(1):
+  service.LoadUser  service/user.go:10
+
+受影响的 RPC 接口(4):
+  user.UserService/BatchGetUser  实现:[user-svc] (*main.UserServiceImpl).BatchGetUser
+    ← [order-svc] (*service.OrderService).Cancel  service/order.go:42
+  user.UserService/GetUser  实现:[user-svc] (*main.UserServiceImpl).GetUser
+    ← [gateway] rpc.GetUserName  rpc/user.go:14
+    ← [order-svc] service.Audit  service/audit.go:14
+    ← [order-svc] (*service.OrderService).Create  service/order.go:31
+    ← [gateway] (*usersdk.Client).DisplayName  common-sdk:usersdk/client.go:21
+  order.OrderService/CancelOrder(传递影响，第 2 层)  实现:[order-svc] (*handler.OrderServiceImpl).CancelOrder
+    工作区内没有调用方
+  order.OrderService/CreateOrder(传递影响，第 2 层)  实现:[order-svc] (*handler.OrderServiceImpl).CreateOrder
+    ← [gateway] rpc.CreateOrder  rpc/order.go:17
+
+受影响的入口(路由/回调处理函数，或没有调用方的函数，4):
+  [gateway] handler.CreateOrder  handler/order.go:11
+  [gateway] handler.GetOrderDetail  handler/order.go:20
+  [gateway] handler.Profile  handler/order.go:32
+  [order-svc] service.Audit  service/audit.go:12
+
+需要知会/回归的组件:gateway、order-svc、user-svc

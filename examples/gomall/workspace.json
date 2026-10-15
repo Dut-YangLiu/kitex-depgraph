@@ -1,0 +1,15 @@
+{
+  "name": "gomall",
+  "repos": [
+    {"name": "frontend", "path": "biz-demo/gomall/app/frontend"},
+    {"name": "cart", "path": "biz-demo/gomall/app/cart"},
+    {"name": "checkout", "path": "biz-demo/gomall/app/checkout"},
+    {"name": "email", "path": "biz-demo/gomall/app/email"},
+    {"name": "order", "path": "biz-demo/gomall/app/order"},
+    {"name": "payment", "path": "biz-demo/gomall/app/payment"},
+    {"name": "product", "path": "biz-demo/gomall/app/product"},
+    {"name": "user", "path": "biz-demo/gomall/app/user"},
+    {"name": "rpc_gen", "path": "biz-demo/gomall/rpc_gen"},
+    {"name": "common", "path": "biz-demo/gomall/common"}
+  ]
+}

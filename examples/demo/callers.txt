@@ -1,0 +1,13 @@
+user.UserService/GetUser
+
+实现方(2):
+  [user-svc] user.UserService/GetUser  (*main.UserServiceImpl).GetUser  handler.go:14  注册名=user
+  [user-svc-v2] user.UserService/GetUser  (main.V2Impl).GetUser  main.go:16  注册名=user-v2
+
+调用方(4 处，来自 2 个组件):
+  gateway
+    user.UserService/GetUser  rpc.GetUserName  rpc/user.go:14  destService=user
+    user.UserService/GetUser  (*usersdk.Client).DisplayName  common-sdk:usersdk/client.go:21  destService=user
+  order-svc
+    user.UserService/GetUser  service.Audit  service/audit.go:14  destService=动态: svcName  [多个候选实现方]
+    user.UserService/GetUser  (*service.OrderService).Create  service/order.go:31  destService=user

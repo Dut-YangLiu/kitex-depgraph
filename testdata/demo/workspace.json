@@ -1,0 +1,11 @@
+{
+  "name": "demo",
+  "repos": [
+    {"name": "gateway", "path": "gateway"},
+    {"name": "order-svc", "path": "order-svc"},
+    {"name": "user-svc", "path": "user-svc"},
+    {"name": "user-svc-v2", "path": "user-svc-v2"},
+    {"name": "common-sdk", "path": "common-sdk"},
+    {"name": "idl", "path": "idl"}
+  ]
+}

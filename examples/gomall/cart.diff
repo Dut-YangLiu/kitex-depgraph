@@ -1,0 +1,7 @@
+diff --git a/biz/service/get_cart.go b/biz/service/get_cart.go
+--- a/biz/service/get_cart.go
++++ b/biz/service/get_cart.go
+@@ -35,2 +35,3 @@
+ 	// Finish your business logic.
++	klog.Info("get cart")
+ 	carts, err := model.GetCartByUserId(s.ctx, mysql.DB, req.GetUserId())

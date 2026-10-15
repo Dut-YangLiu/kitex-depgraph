@@ -1,0 +1,17 @@
+[gateway] handler.CreateOrder  handler/order.go:11
+└─ rpc.CreateOrder  rpc/order.go:16
+   └─ ⇒ RPC order.OrderService/CreateOrder  gateway:rpc/order.go:17
+      └─ [order-svc] (*handler.OrderServiceImpl).CreateOrder  handler/handler.go:19
+         └─ (*service.OrderService).Create  service/order.go:30
+            ├─ ⇒ RPC user.UserService/GetUser  order-svc:service/order.go:31
+            │  └─ [user-svc] (*main.UserServiceImpl).GetUser  handler.go:14
+            └─ (rpc.PayAdapter).Prepay (接口调用)  rpc/pay.go:21
+               └─ ⇒ RPC pay.PayService/prepay  order-svc:rpc/pay.go:22  [工作区外]
+                  └─ ⊘ pay.PayService(工作区外的服务)
+
+涉及组件(3):gateway → order-svc → user-svc
+RPC 调用(3):
+  gateway → order.OrderService/CreateOrder → order-svc
+  order-svc → user.UserService/GetUser → user-svc
+  order-svc → pay.PayService/prepay → 工作区外
+工作区外的服务:pay.PayService(把它们的仓库加入工作区可继续展开)

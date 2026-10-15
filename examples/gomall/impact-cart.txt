@@ -1,0 +1,28 @@
+改动所在仓库:cart
+
+改动的函数(1):
+  (*biz/service.GetCartService).Run  biz/service/get_cart.go:34
+
+受影响的 RPC 接口(2):
+  cart.CartService/GetCart  实现:[cart] (*main.CartServiceImpl).GetCart
+    ← [frontend] (*biz/service.CheckoutService).Run  biz/service/checkout.go:43
+    ← [frontend] (*biz/service.GetCartService).Run  biz/service/get_cart.go:41
+    ← [frontend] biz/utils.WarpResponse  biz/utils/resp.go:42
+    ← [checkout] (*biz/service.CheckoutService).Run  biz/service/checkout.go:60
+  checkout.CheckoutService/Checkout(传递影响，第 2 层)  实现:[checkout] (*main.CheckoutServiceImpl).Checkout
+    ← [frontend] (*biz/service.CheckoutWaitingService).Run  biz/service/checkout_waiting.go:40
+
+受影响的入口(路由/回调处理函数，或没有调用方的函数，11):
+  [checkout] (*main.CheckoutServiceImpl).PlaceOrder  handler.go:28
+  [frontend] biz/handler/about.About  biz/handler/about/about_service.go:29
+  [frontend] biz/handler/cart.AddCartItem  biz/handler/cart/cart_service.go:31
+  [frontend] biz/handler/cart.GetCart  biz/handler/cart/cart_service.go:51
+  [frontend] biz/handler/checkout.Checkout  biz/handler/checkout/checkout_service.go:31
+  [frontend] biz/handler/checkout.CheckoutResult  biz/handler/checkout/checkout_service.go:71
+  [frontend] biz/handler/checkout.CheckoutWaiting  biz/handler/checkout/checkout_service.go:51
+  [frontend] biz/handler/home.Home  biz/handler/home/home_service.go:29
+  [frontend] biz/handler/order.OrderList  biz/handler/order/order_service.go:30
+  [frontend] biz/handler/product.GetProduct  biz/handler/product/product_service.go:29
+  [frontend] biz/handler/product.SearchProducs  biz/handler/product/product_service.go:48
+
+需要知会/回归的组件:cart、checkout、frontend
